@@ -25,13 +25,17 @@ def IPcheck(isIPspecified: bool=False):
     else:
         # Decode the response content as text
         ipInfo = json.loads(response.data.decode('utf-8'))
+
+        # Replace spaces with underscore in country field
+        ipInfo["country"] = ipInfo["country"].replace(" ", "_")
+
         #print(ipInfo)
         # Print the flag based on the ip location
         with open(f"flags/{ipInfo['country']}", "r") as file:
             sys.stdout.write(f"\n{file.read().strip()} ")
             sys.stdout.write(f"\033[2C\033[s \033[9A IP: {ipInfo['ip']}")
             sys.stdout.write(f"\033[u\033[8A  Continent: {ipInfo['continent_code']}")
-            sys.stdout.write(f"\033[u\033[7A  Country: {ipInfo['country']}")
+            sys.stdout.write(f"\033[u\033[7A  Country: {ipInfo['country'].replace('_', ' ')}")
             sys.stdout.write(f"\033[u\033[6A  Region: {ipInfo['country']}")
             sys.stdout.write(f"\033[u\033[5A  City: {ipInfo['country']}")
             sys.stdout.write(f"\033[u\033[4A  ISP: {ipInfo['organization']}")
