@@ -21,7 +21,10 @@ def IPcheck(isIPspecified: bool=False):
 
     # Check if the request was unsuccessful
     if response.status != 200:
-        print(f"Failed to retrieve the IP address. Status code: {response.status}")
+        if json.loads(response.data.decode('utf-8'))['code'] == 401:
+            print(f"Input string is not a valid IP address. Status code: 401")
+        else:
+            print(f"Failed to retrieve the IP address. Status code: {response.status}")
     else:
         # Decode the response content as text
         ipInfo = json.loads(response.data.decode('utf-8'))
@@ -55,8 +58,5 @@ if args.ip != None:
 IPcheck()
 
 
-# TODO: fix the space in the name of the countries: replace them with underscore
-# TODO: write a message for when the response code is 401: {"code":401,"message":"Input string is not a valid IP address"}
-# TODO: print the help when the "-ip" switch is used but no ip has given
 # TODO: fix the case when the ip does not have some of the fields like region or etc... in the database and print "Unknown" instead of it
 # TODO: choose better fields for the ip info
