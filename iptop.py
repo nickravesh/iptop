@@ -33,10 +33,10 @@ def IPcheck(isIPspecified: bool=False):
         with open(f"flags/{ipInfo.get('country', 'Unknown').replace(' ', '_')}", "r") as file:
             sys.stdout.write(f"\n{file.read().strip()} ")
             sys.stdout.write(f"\033[2C\033[s \033[9A IP: {ipInfo.get('ip', 'unknown')}")
-            sys.stdout.write(f"\033[u\033[8A  Continent: {ipInfo.get('continent_code', 'unknown')}")
-            sys.stdout.write(f"\033[u\033[7A  Country: {ipInfo.get('country', 'unknown').replace('_', ' ')}")
-            sys.stdout.write(f"\033[u\033[6A  Region: {ipInfo.get('region', 'unknown')}")
-            sys.stdout.write(f"\033[u\033[5A  City: {ipInfo.get('city', 'unknown')}")
+            sys.stdout.write(f"\033[u\033[8A  Country: {ipInfo.get('country', 'unknown').replace('_', ' ')}")
+            sys.stdout.write(f"\033[u\033[7A  Region: {ipInfo.get('region', 'unknown')}")
+            sys.stdout.write(f"\033[u\033[6A  City: {ipInfo.get('city', 'unknown')}")
+            sys.stdout.write(f"\033[u\033[5A  Continent: {ipInfo.get('continent_code', 'unknown')}")
             sys.stdout.write(f"\033[u\033[4A  ISP: {ipInfo.get('organization', 'unknown')}")
             sys.stdout.write(f"\033[u\033[3A  Timezone: {ipInfo.get('timezone', 'unknown')}")
             sys.stdout.write(f"\033[u\033[2A  Latitude: {ipInfo.get('latitude', 'unknown')}")
@@ -52,6 +52,3 @@ if args.ip != None:
     exit()
 
 IPcheck()
-
-
-# TODO: choose better fields for the ip info
