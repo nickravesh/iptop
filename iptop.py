@@ -1,3 +1,4 @@
+import os
 import sys
 import json
 import urllib3
@@ -8,6 +9,8 @@ parser = argparse.ArgumentParser(description="iptop, The CLI tool for inspecting
 parser.add_argument("-ip", type=str, nargs="+", help="Lookup a specific IP address instead of yours.")
 args = parser.parse_args()
 
+# Get the directory of the script
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 def IPcheck(isIPspecified: bool=False):
     # Create a connection pool for making HTTP requests
@@ -30,7 +33,7 @@ def IPcheck(isIPspecified: bool=False):
         ipInfo:dict = json.loads(response.data.decode('utf-8'))
 
         # Print the flag based on the ip location
-        with open(f"flags/{ipInfo.get('country', 'Unknown').replace(' ', '_')}", "r") as file:
+        with open(f"{script_dir}/flags/{ipInfo.get('country', 'Unknown').replace(' ', '_')}", "r") as file:
             sys.stdout.write(f"\n{file.read().strip()} ")
             sys.stdout.write(f"\033[2C\033[s \033[9A IP: {ipInfo.get('ip', 'unknown')}")
             sys.stdout.write(f"\033[u\033[8A  Country: {ipInfo.get('country', 'unknown').replace('_', ' ')}")
