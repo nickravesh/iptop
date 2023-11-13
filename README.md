@@ -18,7 +18,7 @@
 
 For detailed usage instructions, see the [Usage](#usage) section below.
 
-## One-Liner install for Debian-based distros
+## One-Liner install
 
 ```bash
   curl -Ls https://github.com/nickravesh/iptop/archive/master.tar.gz | tar -xz && cd iptop-master && bash install.sh
