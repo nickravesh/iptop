@@ -48,6 +48,10 @@ def IPcheck(isIPspecified: bool=False):
             sys.stdout.write(f"\033[u \033[10A --------------------")
             sys.stdout.write(f"\033[u \n\n")
 
+        try:
+            print(f"Location On Map:\nhttps://www.openstreetmap.org/export/embed.html?bbox={ipInfo.get('longitude')},{ipInfo.get('latitude')},{ipInfo.get('longitude')},{ipInfo.get('latitude')}&layer=mapnik&marker={ipInfo.get('latitude')},{ipInfo.get('longitude')}")
+        except:
+            pass
 
 # Check if the -ip switch is used
 if args.ip != None:
